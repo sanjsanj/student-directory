@@ -1,6 +1,6 @@
-Student-Directory
+# H1 Student-Directory
 
-Makers Academy pre-course week-4 excercise
+# H3 Makers Academy pre-course week-4 excercise
 
 A directory to:
 - Show a list of all students
