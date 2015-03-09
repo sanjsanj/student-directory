@@ -30,6 +30,20 @@ def print_students_with_a(students)
   end
 end
 
+def print_students_shorter12(students)
+  students.each_with_index do |student, index|
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)" if student[:name].length < 12
+  end
+end
+
+def print_students_noeach(students)
+  i = 0
+  while i < students.length do
+    puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+    i += 1
+  end
+end
+
 def print_footer(names)
   print "Overall, we have #{names.length} great students\n"
 end
@@ -56,5 +70,7 @@ end
 students = input_students
 print_header
 # print_students(students)
-print_students_with_a(students)
+# print_students_with_a(students)
+# print_students_shorter12(students)
+print_students_noeach(students)
 print_footer(students)
