@@ -1,6 +1,10 @@
-def print_header
-  puts "The students of my cohort at Makers Academy"
-  puts "-------------"
+def print_header(students)
+  if students != []
+    puts "The students of my cohort at Makers Academy"
+    puts "-------------"
+  else
+    puts "No data to print"
+  end
 end
 
 def print(students)
@@ -10,7 +14,7 @@ def print(students)
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.length} great students"
+  puts "Overall, we have #{names.length} great students" if names.length > 0
 end
 
 def input_students
@@ -33,6 +37,6 @@ def input_students
 end
 
 students = input_students
-print_header
+print_header(students)
 print(students)
 print_footer(students)
