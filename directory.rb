@@ -5,7 +5,10 @@ end
 
 def print_students(students)
   students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort) #{student[:hobby]} hobby and COB is #{student[:cob]}."
+    linewidth = 30
+    print "#{index + 1}. #{student[:name]} #{student[:cohort]} cohort".ljust(linewidth)
+    print "#{student[:hobby]} hobby".center(linewidth)
+    print "and COB is #{student[:cob]}\n".rjust(linewidth)
   end
 end
 
