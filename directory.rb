@@ -45,8 +45,35 @@ def input_student_data
   students
 end
 
-students = input_student_data
-print_header
+# students = input_student_data
+# print_header
 # print_students(students)
-print_students_march(students)
-print_footer(students)
+# print_students_march(students)
+# print_footer(students)
+
+def interactive_menu
+  students = []
+  loop do
+    #1
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+    #2
+    selection = gets.chomp
+    #3
+    case selection
+      when "1"
+      students = input_student_data
+      when "2"
+      print_header
+      print_students(students)
+      print_footer(students)
+      when "9"
+      exit
+    else
+      puts "I don't know what you meant, try again"
+    end
+  end
+end
+
+interactive_menu
