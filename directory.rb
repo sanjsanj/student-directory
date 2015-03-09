@@ -12,6 +12,19 @@ def print_students(students)
   end
 end
 
+def print_students_march(students)
+  students.each_with_index do |student, index|
+    linewidth = 30
+    if student[:cohort] == :march
+    print "#{index + 1}. #{student[:name]} of #{student[:cohort]} cohort".ljust(linewidth)
+    print "#{student[:hobby]} hobby".center(linewidth)
+    print "and COB is #{student[:cob]}\n".rjust(linewidth)
+    else
+      next
+    end
+  end
+end
+
 def print_footer(names)
   print "Overall, we have #{names.length} great students\n"
 end
@@ -32,5 +45,6 @@ end
 
 students = input_student_data
 print_header
-print_students(students)
+# print_students(students)
+print_students_march(students)
 print_footer(students)
