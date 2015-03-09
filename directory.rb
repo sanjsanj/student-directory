@@ -22,21 +22,22 @@ end
 def input_student_data
   print "Please enter the names of the student, their cohort, their hobby and country of birth seperated by ',' without any spaces\n"
   print "To finish, just hit enter twice\n"
-  name = gets.strip
+  name = STDIN.gets.strip
   while !name.empty? do
     studary = name.split(",")
     @students << {:name => studary[0], :cohort => studary[1].to_sym, :hobby => studary[2], :cob => studary[3]}
     @students.length == 1 ? pluralize = "student" : pluralize = "students"
     print "Now we have #{@students.length} #{pluralize}\n"
-    name = gets.strip
+    name = STDIN.gets.strip
   end
   @students
 end
 
 def interactive_menu
   loop do
+    try_load_students
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
@@ -82,13 +83,25 @@ def save_students
   puts "File saved"
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort, hobby, cob = line.chomp.split(",")
     @students << {:name => name, :cohort => cohort.to_sym, :hobby => hobby, :cob => cob }
   end
   file.close
 end
-  
+
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.length} students from #{filename}"
+  else
+    puts "Sorry, #{filename} doesn't exist"
+    exit
+  end
+end
+
 interactive_menu
