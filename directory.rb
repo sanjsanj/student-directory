@@ -11,3 +11,7 @@ puts "Richard Lynch"
 puts "Max Weaver"
 puts "Phoebe Hugh"
 puts "Sanjay Purswani"
+
+print "Overall, we have "
+print 11
+puts " great students"
