@@ -6,7 +6,7 @@ end
 def print_students(students)
   students.each_with_index do |student, index|
     linewidth = 30
-    print "#{index + 1}. #{student[:name]} #{student[:cohort]} cohort".ljust(linewidth)
+    print "#{index + 1}. #{student[:name]} of #{student[:cohort]} cohort".ljust(linewidth)
     print "#{student[:hobby]} hobby".center(linewidth)
     print "and COB is #{student[:cob]}\n".rjust(linewidth)
   end
@@ -17,13 +17,13 @@ def print_footer(names)
 end
 
 def input_student_data
-  print "Please enter the names of the student, their hobby and country of birth seperate by ',' without any spaces\n"
+  print "Please enter the names of the student, their cohort, their hobby and country of birth seperated by ',' without any spaces\n"
   print "To finish, just hit enter twice\n"
-  students = []
+  students = Array.new
   name = gets.chomp
   while !name.empty? do
     studary = name.split(",")
-    students << {:name => studary[0], :cohort => :march, :hobby => studary[1], :cob => studary[2]}
+    students << {:name => studary[0], :cohort => studary[1].to_sym, :hobby => studary[2], :cob => studary[3]}
     print "Now we have #{students.length} students\n"
     name = gets.chomp
   end
