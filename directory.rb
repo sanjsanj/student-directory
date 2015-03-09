@@ -33,12 +33,6 @@ def input_student_data
   @students
 end
 
-# students = input_student_data
-# print_header
-# print_students(students)
-# print_students_march(students)
-# print_footer(students)
-
 def interactive_menu
   loop do
     print_menu
@@ -50,6 +44,7 @@ def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to students.csv"
+  puts "4. Load the list from students.csv"
   puts "9. Exit"
 end
   
@@ -61,6 +56,8 @@ def process(selection)
       show_students
     when "3"
       save_students
+    when "4"
+      load_students
     when "9"
       exit
     else
@@ -83,6 +80,15 @@ def save_students
   end
   file.close
   puts "File saved"
+end
+
+def load_students
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line|
+    name, cohort, hobby, cob = line.chomp.split(",")
+    @students << {:name => name, :cohort => cohort.to_sym, :hobby => hobby, :cob => cob }
+  end
+  file.close
 end
   
 interactive_menu
