@@ -73,23 +73,23 @@ def show_students
 end
 
 def save_students
-  file = File.open("students.csv", "w")
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort], student[:hobby], student[:cob]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  File.open("students.csv", "w") do |filestuff|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort], student[:hobby], student[:cob]]
+      csv_line = student_data.join(",")
+      filestuff.puts csv_line
+    end
   end
-  file.close
   puts "File saved"
 end
 
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort, hobby, cob = line.chomp.split(",")
-    @students << {:name => name, :cohort => cohort.to_sym, :hobby => hobby, :cob => cob }
+  File.open(filename, "r") do |filestuff|
+    filestuff.readlines.each do |line|
+      name, cohort, hobby, cob = line.chomp.split(",")
+      @students << {:name => name, :cohort => cohort.to_sym, :hobby => hobby, :cob => cob }
+    end
   end
-  file.close
 end
 
 def try_load_students
@@ -104,4 +104,5 @@ def try_load_students
   end
 end
 
+puts "This program was executed by #{$0}"
 interactive_menu
