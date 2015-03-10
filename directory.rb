@@ -74,14 +74,12 @@ def show_students
 end
 
 def save_students
-  File.open("students.csv", "w") do |filestuff|
+  CSV.open("students.csv", "wb") do |csv|
     @students.each do |student|
-      student_data = [student[:name], student[:cohort], student[:hobby], student[:cob]]
-      csv_line = student_data.join(",")
-      filestuff.puts csv_line
+      csv << [student[:name], student[:cohort], student[:hobby], student[:cob]]
     end
   end
-  puts "File saved"
+  puts "#{@students.length} students' data saved in students.csv"
 end
 
 def load_students(filename = "students.csv")
