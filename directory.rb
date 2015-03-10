@@ -45,8 +45,8 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
+  puts "3. Save the list to file"
+  puts "4. Load the list from file"
   puts "9. Exit"
 end
   
@@ -74,12 +74,16 @@ def show_students
 end
 
 def save_students
-  CSV.open("students.csv", "wb") do |csv|
+  savefile = "students.csv"
+  puts "Enter filename or leave blank to use students.csv"
+  savefile = gets.chomp
+  savefile = "students.csv" if savefile == ""
+  CSV.open(savefile, "a+") do |csv|
     @students.each do |student|
       csv << [student[:name], student[:cohort], student[:hobby], student[:cob]]
     end
   end
-  puts "#{@students.length} students' data saved in students.csv"
+  puts "#{@students.length} students' data saved in #{savefile}"
 end
 
 def load_students(filename = "students.csv")
