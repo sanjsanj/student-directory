@@ -1,3 +1,4 @@
+require "csv"
 @students = []
 
 def print_header
@@ -84,12 +85,11 @@ def save_students
 end
 
 def load_students(filename = "students.csv")
-  File.open(filename, "r") do |filestuff|
-    filestuff.readlines.each do |line|
-      name, cohort, hobby, cob = line.chomp.split(",")
-      @students << {:name => name, :cohort => cohort.to_sym, :hobby => hobby, :cob => cob }
-    end
+  CSV.foreach(filename) do |row|
+    name, cohort, hobby, cob = row
+    @students << {:name => name, :cohort => cohort.to_sym, :hobby => hobby, :cob => cob }
   end
+  puts "Loaded #{@students.length} students from #{filename}"
 end
 
 def try_load_students
