@@ -45,7 +45,7 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to file"
+  puts "3. Save the list to file (append)"
   puts "4. Load the list from file"
   puts "9. Exit"
 end
@@ -74,7 +74,6 @@ def show_students
 end
 
 def save_students
-  savefile = "students.csv"
   puts "Enter filename or leave blank to use students.csv"
   savefile = gets.chomp
   savefile = "students.csv" if savefile == ""
@@ -87,11 +86,14 @@ def save_students
 end
 
 def load_students(filename = "students.csv")
-  CSV.foreach(filename) do |row|
+  puts "Enter name of file to load from or leave blank to use students.csv"
+  loadfile = gets.chomp
+  loadfile = "students.csv" if loadfile == ""
+  CSV.foreach(loadfile) do |row|
     name, cohort, hobby, cob = row
     @students << {:name => name, :cohort => cohort.to_sym, :hobby => hobby, :cob => cob }
   end
-  puts "Loaded #{@students.length} students from #{filename}"
+  puts "Loaded #{@students.length} students from #{loadfile}"
 end
 
 def try_load_students
